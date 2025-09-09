@@ -8,6 +8,6 @@ namespace ClassLib
 {
     public interface IStudentRepo
     {
-
+        double GetAvg(List<int> listOfGrades);
     }
 }
