@@ -57,6 +57,7 @@
     <Compile Include="IStudentRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="StudentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

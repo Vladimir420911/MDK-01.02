@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ClassLib
 {
     public interface IStudentRepo
     {
-        double GetAvg(List<int> listOfGrades);
+        double GetAvgGrade(int[] arrayOfGrades);
     }
 }
