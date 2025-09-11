@@ -9,6 +9,6 @@ namespace ClassLib
 {
     public interface IStudentRepo
     {
-        double GetAvgGrade(int[] arrayOfGrades);
+        double GetAvgGradeById(int id);
     }
 }

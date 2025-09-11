@@ -15,9 +15,8 @@ namespace ClassLib
             _studentRepo = studentRepo;
         }
 
-        public double StudentAvgGrade(int[] grades)
+        public double StudentAvgGrade(int id)
         {
-            return _studentRepo.GetAvgGrade(grades);
         }
     }
 }
