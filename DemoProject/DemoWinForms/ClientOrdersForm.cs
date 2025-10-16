@@ -13,8 +13,10 @@ namespace DemoProject
 {
     public partial class ClientOrdersForm: Form
     {
-        public ClientOrdersForm()
+        private User currentUser;
+        public ClientOrdersForm(User user)
         {
+            currentUser = user;
             InitializeComponent();
         }
 
@@ -25,6 +27,30 @@ namespace DemoProject
             /// По цене: средняя цена, по стоимости - общая сумма, остальные - прочерки
             OrdersTable.DataSource = null;
             OrdersTable.DataSource = order.GetRecords();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if(currentUser.Role == UserRole.Manager)
+            {
+                MessageBox.Show("У вас нет прав для добавления заказов\n" +
+                                "Обратитесь к адинистратору",
+                                "Сообщение",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (currentUser.Role == UserRole.Manager)
+            {
+                MessageBox.Show("У вас нет прав для удаления заказов\n" +
+                                "Обратитесь к адинистратору",
+                                "Сообщение",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
         }
     }
 }

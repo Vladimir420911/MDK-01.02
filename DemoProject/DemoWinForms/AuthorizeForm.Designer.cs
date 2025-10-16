@@ -43,6 +43,7 @@
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(139, 20);
             this.PasswordTextBox.TabIndex = 0;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
             // 
             // LoginComboBox
             // 

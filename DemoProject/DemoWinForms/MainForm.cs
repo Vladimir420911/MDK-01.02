@@ -49,7 +49,7 @@ namespace DemoProject
             }
             else
             {
-                ClientOrdersForm ordersForm = new ClientOrdersForm();
+                ClientOrdersForm ordersForm = new ClientOrdersForm(currentUser_);
                 ordersForm.Text = "Заказы клиента " + obj.Name;
                 ordersForm.SetOrder(obj.order);
                 ordersForm.ShowDialog();
@@ -87,6 +87,21 @@ namespace DemoProject
             {
                 Text = this.Text + " - " + currentUser_.Login;
             }
+        }
+
+        private void toolStripAddClientButton_Click(object sender, System.EventArgs e)
+        {
+            if(isLowRoleUser())
+            {
+                MessageBox.Show("У вас нет прав для добавления клиентов\n" +
+                                "Обратитесь к адинистратору",
+                                "Сообщение",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+
+            AddClientForm addClientForm = new AddClientForm();
+            addClientForm.Show();
         }
     }
 }
