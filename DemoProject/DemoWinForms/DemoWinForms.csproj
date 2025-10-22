@@ -52,6 +52,12 @@
     <Compile Include="AddClientForm.Designer.cs">
       <DependentUpon>AddClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddOrderRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddOrderRecordForm.Designer.cs">
+      <DependentUpon>AddOrderRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AuthorizeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddClientForm.resx">
       <DependentUpon>AddClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddOrderRecordForm.resx">
+      <DependentUpon>AddOrderRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AuthorizeForm.resx">
       <DependentUpon>AuthorizeForm.cs</DependentUpon>
