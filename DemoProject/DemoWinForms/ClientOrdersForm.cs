@@ -11,12 +11,14 @@ using System.Windows.Forms;
 
 namespace DemoProject
 {
-    public partial class ClientOrdersForm: Form
+    public partial class ClientOrdersForm : Form
     {
         private User currentUser;
-        public ClientOrdersForm(User user)
+        private Client currentClient;
+        public ClientOrdersForm(User user, Client client)
         {
             currentUser = user;
+            currentClient = client;
             InitializeComponent();
         }
 
@@ -31,15 +33,23 @@ namespace DemoProject
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if(currentUser.Role == UserRole.Manager)
+            if (currentUser.Role == UserRole.Manager)
             {
                 MessageBox.Show("У вас нет прав для добавления заказов\n" +
                                 "Обратитесь к адинистратору",
                                 "Сообщение",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
+                this.Close();
             }
 
+            AddOrderRecordForm addOrderRecordForm = new AddOrderRecordForm(currentClient.order);
+            addOrderRecordForm.ShowDialog();
+
+            if(DialogResult == DialogResult.OK)
+            {
+                SetOrder(currentClient.order);
+            }
 
         }
 

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DemoLib
 {
     public class Order
     {
-        private List<OrderRecord> records_ = new List<OrderRecord>();
+        private BindingList<OrderRecord> records_ = new BindingList<OrderRecord>();
 
         public void AddRecord(OrderRecord record)
         {
             records_.Add(record);
         }
 
-        public List<OrderRecord> GetRecords()
+        public BindingList<OrderRecord> GetRecords()
         {
             return records_;
         }
