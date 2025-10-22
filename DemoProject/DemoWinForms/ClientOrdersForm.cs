@@ -40,13 +40,13 @@ namespace DemoProject
                                 "Сообщение",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
-                this.Close();
+                return;
             }
 
             AddOrderRecordForm addOrderRecordForm = new AddOrderRecordForm(currentClient.order);
             addOrderRecordForm.ShowDialog();
 
-            if(DialogResult == DialogResult.OK)
+            if (DialogResult == DialogResult.OK)
             {
                 SetOrder(currentClient.order);
             }
@@ -62,6 +62,16 @@ namespace DemoProject
                                 "Сообщение",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (OrdersTable.SelectedRows.Count > 0)
+            {
+                foreach(DataGridViewRow selectedRow in OrdersTable.SelectedRows)
+                {
+                    currentClient.order.RemoveRecord(selectedRow.Index);
+                    SetOrder(currentClient.order);
+                }
             }
         }
     }

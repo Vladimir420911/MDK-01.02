@@ -16,5 +16,10 @@ namespace DemoLib
         {
             return records_;
         }
+
+        public void RemoveRecord(int index)
+        {
+            records_.RemoveAt(index);
+        }
     }
 }
