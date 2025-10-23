@@ -1,10 +1,13 @@
 ﻿using ClientCard;
 using DemoLib;
 using DemoLib.Models;
+using DemoLib.Models.Clients;
 using DemoLib.Presenters;
 using DemoLib.Views;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace DemoProject
 {
@@ -17,19 +20,33 @@ namespace DemoProject
             currentUser_ = user;
             InitializeComponent();
 
-            MemoryClientsModel model = new MemoryClientsModel();
+            MySQLClientsModel model = new MySQLClientsModel();
 
-            /// Д.З Сделать нормальный вид карточек
+            int countClients = 0;
+            try
+            {
+                countClients = model.GetClientsCount();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+                                "Ошибка работы с БД",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
+
             List<IClientView> cards = new List<IClientView>();
-            for (int i = 0; i < model.GetClientsCount(); i++)
+            /// Д.З Сделать нормальный вид карточек
+            for (int i = 0; i < countClients; i++)
             {
                 ClientView card = new ClientView(); /// наклепали пустую карточку
                 card.SelectedClient += Card_SelectedClient;
                 ClientsLayout.Controls.Add(card); /// добавляем карточку на главную форму в layout
-                cards.Add(card); 
+                cards.Add(card);
             }
 
-            presenter_ = new ClientPresenter(new MemoryClientsModel(), cards);
+            presenter_ = new ClientPresenter(model, cards);
         }
 
         private void Card_SelectedClient(Client obj)
