@@ -8,7 +8,7 @@ namespace SimpleDemoWin
 {
     public partial class MainForm : Form
     {
-        MySQLClientsModel model; 
+        MySQLClientsModel model;
         private List<Client> allClients_ = new List<Client>();
         public MainForm()
         {
@@ -18,16 +18,7 @@ namespace SimpleDemoWin
         private void MainForm_Load(object sender, EventArgs e)
         {
             model = new MySQLClientsModel();
-            try
-            {
-                allClients_ = model.ReadAllClients();
-                ShowClients(allClients_);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"ОшибкаЖ {ex.Message}");
-            }
-
+            RefreshClientListBox();
         }
 
         private void ClientsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,7 +63,7 @@ namespace SimpleDemoWin
             {
                 if ((String.IsNullOrEmpty(searchingText)
                      || client.Name.ToLower().Contains(searchingText.ToLower()))
-                    && (String.IsNullOrEmpty(alphabetText) 
+                    && (String.IsNullOrEmpty(alphabetText)
                      || client.Name[0] == alphabetText[0]))
                 {
                     resultClients.Add(client);
@@ -106,20 +97,43 @@ namespace SimpleDemoWin
         private void AddButton_Click(object sender, EventArgs e)
         {
             var addClientForm = new AddClientForm(model);
-            if(addClientForm.ShowDialog() == DialogResult.OK)
+            if (addClientForm.ShowDialog() == DialogResult.OK)
             {
-                model = new MySQLClientsModel();
+                RefreshClientListBox();
+            }
+
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            if (ClientsListBox.SelectedItems.Count > 0)
+            {
+                string name = ClientsListBox.Text;
                 try
                 {
-                    allClients_ = model.ReadAllClients();
-                    ShowClients(allClients_);
+                    model.DeleteClientByName(name);
+                    RefreshClientListBox();
+                    MessageBox.Show("Клиент удален");
+
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"ОшибкаЖ {ex.Message}");
+                    MessageBox.Show($"Ошибка: {ex.Message}");
                 }
             }
+        }
 
+        private void RefreshClientListBox()
+        {
+            try
+            {
+                allClients_ = model.ReadAllClients();
+                ShowClients(allClients_);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"ОшибкаЖ {ex.Message}");
+            }
         }
     }
 }

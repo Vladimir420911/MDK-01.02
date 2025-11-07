@@ -98,6 +98,7 @@
             this.RemoveButton.Size = new System.Drawing.Size(55, 35);
             this.RemoveButton.Text = "Удалить";
             this.RemoveButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // EditButton
             // 
