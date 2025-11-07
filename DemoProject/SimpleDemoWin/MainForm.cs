@@ -100,6 +100,7 @@ namespace SimpleDemoWin
             if (addClientForm.ShowDialog() == DialogResult.OK)
             {
                 RefreshClientListBox();
+                MessageBox.Show("Клиент добавлен");
             }
 
         }
@@ -140,6 +141,22 @@ namespace SimpleDemoWin
             catch (Exception ex)
             {
                 MessageBox.Show($"ОшибкаЖ {ex.Message}");
+            }
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            foreach(var client in allClients_)
+            {
+                if(client.Name == ClientsListBox.Text)
+                {
+                    var UpdateForm = new UpdateClientForm(client, model);
+                    if(UpdateForm.ShowDialog() == DialogResult.OK)
+                    {
+                        RefreshClientListBox();
+                        MessageBox.Show("Данные клиента обновлены");
+                    }
+                }
             }
         }
     }

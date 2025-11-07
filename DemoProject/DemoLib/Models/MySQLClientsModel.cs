@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
+using System.Xml.Linq;
 
 namespace DemoLib.Models.Clients
 {
@@ -127,7 +128,7 @@ namespace DemoLib.Models.Clients
             }
         }
 
-        public void UpdateClientByName(string name)
+        public void UpdateClientById(int id, string name, string description, string phone, string mail, string path)
         {
             try
             {
@@ -135,7 +136,7 @@ namespace DemoLib.Models.Clients
                 {
                     connection.Open();
 
-                    string query = $"DELETE FROM clientsinfo WHERE clientName = '{name}'";
+                    string query = $"UPDATE clientsinfo SET clientName = '{name}', phone = '{phone}', mail = '{mail}', description = '{description}', imagePath = '{path}' WHERE id = '{id}'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.ExecuteNonQuery();
                 }

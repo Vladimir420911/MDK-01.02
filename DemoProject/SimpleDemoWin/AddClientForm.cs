@@ -43,16 +43,22 @@ namespace SimpleDemoWin
             string mail = MailTextBox.Text;
             string imagePath = ClientPictureBox.ImageLocation;
 
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description)
+                || string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(mail) || string.IsNullOrWhiteSpace(imagePath))
+            {
+                MessageBox.Show("Поля не могут быть пустыми");
+                return;
+            }
+
             try
             {
                 model_.AddClient(name, description, phone, mail, imagePath);
-                MessageBox.Show("Клиент добавлен");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"Ошибка: {ex}");
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
     }
