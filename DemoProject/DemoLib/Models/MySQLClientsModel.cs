@@ -10,7 +10,7 @@ namespace DemoLib.Models.Clients
 {
     public class MySQLClientsModel : IClientsModel
     {
-        private const string connStr = "server=localhost;user=root;database=clients_db;password=1234567;port=3307;";
+        private const string connStr = "server=localhost;user=root;database=clients_db;password=123456;port=3307;";
         public int GetClientsCount()
         {
             try
@@ -84,6 +84,25 @@ namespace DemoLib.Models.Clients
                 }
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void AddClient(string name, string description, string phone, string mail, string imagePath)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    string query = $"INSERT INTO clientsinfo (clientName, phone, mail, description, imagePath) VALUES ('{name}', '{phone}', '{mail}', '{description}', '{imagePath}')";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

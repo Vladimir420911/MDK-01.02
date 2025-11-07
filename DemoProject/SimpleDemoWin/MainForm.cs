@@ -8,23 +8,25 @@ namespace SimpleDemoWin
 {
     public partial class MainForm : Form
     {
+        MySQLClientsModel model; 
         private List<Client> allClients_ = new List<Client>();
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
-            MySQLClientsModel model = new MySQLClientsModel();
-
-            allClients_ = model.ReadAllClients();
-            ShowClients(allClients_);
+            model = new MySQLClientsModel();
+            try
+            {
+                allClients_ = model.ReadAllClients();
+                ShowClients(allClients_);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"ОшибкаЖ {ex.Message}");
+            }
 
         }
 
@@ -99,6 +101,25 @@ namespace SimpleDemoWin
         private void AlphabetComboBox_TextChanged(object sender, EventArgs e)
         {
             FilterAndSearch();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            var addClientForm = new AddClientForm(model);
+            if(addClientForm.ShowDialog() == DialogResult.OK)
+            {
+                model = new MySQLClientsModel();
+                try
+                {
+                    allClients_ = model.ReadAllClients();
+                    ShowClients(allClients_);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"ОшибкаЖ {ex.Message}");
+                }
+            }
+
         }
     }
 }

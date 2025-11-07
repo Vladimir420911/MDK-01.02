@@ -30,16 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ClientsListBox = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.AddButton = new System.Windows.Forms.ToolStripButton();
             this.RemoveButton = new System.Windows.Forms.ToolStripButton();
             this.EditButton = new System.Windows.Forms.ToolStripButton();
-            this.ClientsListBox = new System.Windows.Forms.ListBox();
-            this.ContentView = new System.Windows.Forms.Panel();
-            this.Card = new ClientCard.ClientView();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.SearchByNameTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.AlphabetComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.ContentView = new System.Windows.Forms.Panel();
+            this.Card = new ClientCard.ClientView();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.ContentView.SuspendLayout();
@@ -55,6 +55,16 @@
             this.panel1.Size = new System.Drawing.Size(218, 317);
             this.panel1.TabIndex = 0;
             // 
+            // ClientsListBox
+            // 
+            this.ClientsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ClientsListBox.FormattingEnabled = true;
+            this.ClientsListBox.Location = new System.Drawing.Point(0, 0);
+            this.ClientsListBox.Name = "ClientsListBox";
+            this.ClientsListBox.Size = new System.Drawing.Size(218, 317);
+            this.ClientsListBox.TabIndex = 0;
+            this.ClientsListBox.SelectedIndexChanged += new System.EventHandler(this.ClientsListBox_SelectedIndexChanged);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -69,7 +79,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(800, 38);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // AddButton
             // 
@@ -79,6 +88,7 @@
             this.AddButton.Size = new System.Drawing.Size(63, 35);
             this.AddButton.Text = "Добавить";
             this.AddButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // RemoveButton
             // 
@@ -97,36 +107,6 @@
             this.EditButton.Size = new System.Drawing.Size(91, 35);
             this.EditButton.Text = "Редактировать";
             this.EditButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // ClientsListBox
-            // 
-            this.ClientsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ClientsListBox.FormattingEnabled = true;
-            this.ClientsListBox.Location = new System.Drawing.Point(0, 0);
-            this.ClientsListBox.Name = "ClientsListBox";
-            this.ClientsListBox.Size = new System.Drawing.Size(218, 317);
-            this.ClientsListBox.TabIndex = 0;
-            this.ClientsListBox.SelectedIndexChanged += new System.EventHandler(this.ClientsListBox_SelectedIndexChanged);
-            // 
-            // ContentView
-            // 
-            this.ContentView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ContentView.Controls.Add(this.Card);
-            this.ContentView.Location = new System.Drawing.Point(215, 41);
-            this.ContentView.Name = "ContentView";
-            this.ContentView.Size = new System.Drawing.Size(585, 314);
-            this.ContentView.TabIndex = 2;
-            // 
-            // Card
-            // 
-            this.Card.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.Card.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Card.Location = new System.Drawing.Point(0, 0);
-            this.Card.Name = "Card";
-            this.Card.Size = new System.Drawing.Size(585, 314);
-            this.Card.TabIndex = 0;
             // 
             // toolStripLabel1
             // 
@@ -180,6 +160,26 @@
             this.AlphabetComboBox.Size = new System.Drawing.Size(121, 38);
             this.AlphabetComboBox.SelectedIndexChanged += new System.EventHandler(this.AlphabetComboBox_SelectedIndexChanged);
             this.AlphabetComboBox.TextChanged += new System.EventHandler(this.AlphabetComboBox_TextChanged);
+            // 
+            // ContentView
+            // 
+            this.ContentView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ContentView.Controls.Add(this.Card);
+            this.ContentView.Location = new System.Drawing.Point(215, 41);
+            this.ContentView.Name = "ContentView";
+            this.ContentView.Size = new System.Drawing.Size(585, 314);
+            this.ContentView.TabIndex = 2;
+            // 
+            // Card
+            // 
+            this.Card.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.Card.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Card.Location = new System.Drawing.Point(0, 0);
+            this.Card.Name = "Card";
+            this.Card.Size = new System.Drawing.Size(585, 314);
+            this.Card.TabIndex = 0;
             // 
             // MainForm
             // 
