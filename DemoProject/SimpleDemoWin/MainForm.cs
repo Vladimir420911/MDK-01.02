@@ -109,16 +109,23 @@ namespace SimpleDemoWin
             if (ClientsListBox.SelectedItems.Count > 0)
             {
                 string name = ClientsListBox.Text;
-                try
-                {
-                    model.DeleteClientByName(name);
-                    RefreshClientListBox();
-                    MessageBox.Show("Клиент удален");
 
-                }
-                catch (Exception ex)
+                foreach(var client in allClients_)
                 {
-                    MessageBox.Show($"Ошибка: {ex.Message}");
+                    if(client.Name == name)
+                    {
+                        try
+                        {
+                            model.DeleteClientById(client.ID);
+                            RefreshClientListBox();
+                            MessageBox.Show("Клиент удален");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Ошибка: {ex.Message}");
+                        }
+                    }
                 }
             }
         }

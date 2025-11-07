@@ -108,7 +108,7 @@ namespace DemoLib.Models.Clients
             }
         }
 
-        public void DeleteClientByName(string name)
+        public void DeleteClientById(int id)
         {
             try
             {
@@ -116,7 +116,26 @@ namespace DemoLib.Models.Clients
                 {
                     connection.Open();
 
-                    string query = $"DELETE FROM clientsinfo WHERE clientNAme = '{name}'";
+                    string query = $"DELETE FROM clientsinfo WHERE id = '{id}'";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void UpdateClientByName(string name)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    string query = $"DELETE FROM clientsinfo WHERE clientName = '{name}'";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.ExecuteNonQuery();
                 }
